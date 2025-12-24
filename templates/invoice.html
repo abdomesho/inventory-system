@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8"><title>فاتورة - Best Cold</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style> body { background:#f1f1f1; padding:20px; } .invoice-card { background:white; padding:40px; max-width:850px; margin:auto; border-radius:15px; } .brand { font-size:35px; font-weight:800; color:#0d6efd; border-bottom:3px solid #0d6efd; } @media print { .no-print { display:none; } } </style>
+</head>
+<body>
+    <div class="invoice-card shadow-lg">
+        <div class="text-center mb-4"><div class="brand">BEST COLD</div><p class="fw-bold text-muted mt-2">للتبريد والتكييف</p></div>
+        <div class="row mb-4"><div class="col-6"><p>العميل: {{sale.customer_name}}</p></div><div class="col-6 text-start"><p>التاريخ: {{sale.sale_date}}</p></div></div>
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-light"><tr><th>الصنف</th><th>السيريال</th><th>المواصفات الكاملة</th><th>السعر</th><th>الكمية</th><th>الإجمالي</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>{{sale.model}}</td>
+                    <td><small>{{sale.serial_number}}</small></td>
+                    <td><small>{{sale.specs_info}}</small></td>
+                    <td>{{sale.price}}</td>
+                    <td>{{sale.quantity_sold}}</td>
+                    <td class="fw-bold text-primary">{{sale.price * sale.quantity_sold}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="mt-3 text-end">
+            <p>المسؤول: {{sale.salesman}}</p>
+            <h5 class="fw-bold">الإجمالي النهائي: {{sale.price * sale.quantity_sold}} ج.م</h5>
+        </div>
+        <div class="text-center mt-5 no-print"><button onclick="window.print()" class="btn btn-primary px-5">🖨️ طباعة الفاتورة</button> <a href="/sales" class="btn btn-dark">سجل المبيعات</a></div>
+    </div>
+</body>
+</html>

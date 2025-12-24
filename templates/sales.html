@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-4 fw-bold">📜 سجل المبيعات</h3>
+<div class="table-responsive bg-white shadow-sm rounded-3">
+    <table class="table table-hover align-middle text-center mb-0">
+        <thead class="table-dark"><tr><th>التاريخ</th><th>العميل</th><th>الموديل</th><th>المسؤول</th><th>الإجمالي</th><th>إجراء</th></tr></thead>
+        <tbody>
+            {% for s in sales %}
+            <tr>
+                <td>{{s.sale_date}}</td>
+                <td>{{s.customer_name}}</td>
+                <td>{{s.model}}</td>
+                <td><span class="badge bg-primary">{{s.salesman}}</span></td>
+                <td class="fw-bold text-success">{{s.price * s.quantity_sold}}</td>
+                <td>
+                    <a href="/invoice/{{s.id}}" class="btn btn-sm btn-outline-primary">📄</a>
+                    <a href="/return/{{s.id}}" class="btn btn-sm btn-warning" onclick="return confirm('هل تريد إرجاع المنتج وحذف الفاتورة؟')">🔄 مرتجع</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

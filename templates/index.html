@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card p-3 mb-4 shadow-sm border-0 rounded-3">
+    <div class="row g-3 align-items-center">
+        <div class="col-md-7">
+            <div class="btn-group w-100 shadow-sm">
+                <a href="/?type=كباس" class="btn btn-{{'primary' if current_type=='كباس' else 'outline-primary'}}">كباس</a>
+                <a href="/?type=كوندنسر" class="btn btn-{{'primary' if current_type=='كوندنسر' else 'outline-primary'}}">كوندنسر</a>
+                <a href="/?type=كويل" class="btn btn-{{'primary' if current_type=='كويل' else 'outline-primary'}}">كويل</a>
+                <a href="/?type=وحدات" class="btn btn-{{'primary' if current_type=='وحدات' else 'outline-primary'}}">وحدات</a>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <form class="d-flex"><input type="hidden" name="type" value="{{current_type}}">
+                <input name="search" class="form-control me-2" placeholder="بحث بالموديل أو السيريال...">
+                <button class="btn btn-success shadow-sm">بحث</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="d-flex justify-content-between mb-3">
+    <h4 class="fw-bold">قائمة المنتجات: {{current_type}}</h4>
+    <a href="/add" class="btn btn-dark shadow-sm">➕ إضافة صنف</a>
+</div>
+
+<div class="table-responsive bg-white shadow-sm rounded-3">
+    <table class="table table-hover align-middle mb-0 text-center">
+        <thead class="table-dark"><tr><th>الفئة</th><th>الموديل</th><th>القدرة</th><th>الكمية</th><th>المكان</th><th>تحكم</th></tr></thead>
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td>{{p.category}}</td>
+                <td><strong>{{p.model}}</strong><br><small class="text-muted">{{p.serial_number}}</small></td>
+                <td>{{p.capacity}}</td>
+                <td><span class="badge {{'bg-success' if p.quantity > 0 else 'bg-danger'}} p-2 px-3">{{p.quantity}}</span></td>
+                <td>{{p.location}}</td>
+                <td>
+                    {% if current_type == 'كوندنسر' %}
+                    <a href="/quick_sell/{{p.id}}" class="btn btn-sm btn-info text-white shadow-sm">واحدة</a>
+                    {% endif %}
+                    <a href="/sell/{{p.id}}" class="btn btn-sm btn-success shadow-sm">بيع</a> 
+                    <a href="/delete/{{p.id}}" class="btn btn-sm btn-danger shadow-sm" onclick="return confirm('حذف الصنف؟')">حذف</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

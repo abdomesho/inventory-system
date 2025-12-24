@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="card p-4 shadow-sm mx-auto border-0" style="max-width: 650px;">
+    <h4 class="mb-4 fw-bold">➕ إضافة صنف جديد</h4>
+    <form method="post">
+        <div class="row g-3 text-end">
+            <div class="col-md-6"><label class="mb-1">النوع</label><select name="type" class="form-select shadow-sm"><option>كباس</option><option>كوندنسر</option><option>كويل</option><option>وحدات</option></select></div>
+            <div class="col-md-6"><label class="mb-1">الماركة/الفئة</label><input name="category" class="form-control shadow-sm" required></div>
+            <div class="col-md-6"><label class="mb-1">الموديل</label><input name="model" class="form-control shadow-sm" required></div>
+            <div class="col-md-6"><label class="mb-1">السيريال</label><input name="serial" class="form-control shadow-sm" required></div>
+            <div class="col-md-4"><label class="mb-1">القدرة</label><input name="capacity" class="form-control shadow-sm"></div>
+            <div class="col-md-4"><label class="mb-1">الإزاحة</label><input name="displacement" class="form-control shadow-sm"></div>
+            <div class="col-md-4"><label class="mb-1">اللون</label><input name="color" class="form-control shadow-sm"></div>
+            <div class="col-md-6"><label class="mb-1">الكمية</label><input type="number" name="quantity" class="form-control shadow-sm" required></div>
+            <div class="col-md-6"><label class="mb-1">مكان التخزين</label><input name="location" class="form-control shadow-sm"></div>
+        </div>
+        <button class="btn btn-primary w-100 mt-4 py-3 shadow">حفظ البيانات</button>
+    </form>
+</div>
+{% endblock %}
